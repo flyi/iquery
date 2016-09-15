@@ -35,7 +35,7 @@ def show_usage():
     iquery <city> <show> [<days>]
     iquery [-dgktz] <from> <to> <date>
 
-Go to `tickets -h` for more details.
+Go to `iquery -h` for more details.
 """
     pass
 
