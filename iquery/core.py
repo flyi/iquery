@@ -33,7 +33,7 @@ def show_usage():
     iquery -p <city>
     iquery -p <city> <hospital>
     iquery <city> <show> [<days>]
-    iquery [-dgktz] <from> <to> <date>
+    iquery [-dgktzs] <from> <to> <date>
 
 Go to `iquery -h` for more details.
 """
@@ -49,7 +49,7 @@ Usage:
     iquery -p <city>
     iquery -p <city> <hospital>
     iquery <city> <show> [<days>]
-    iquery [-dgktz] <from> <to> <date>
+    iquery [-dgktzs] <from> <to> <date>
 
 Arguments:
     from             出发站
@@ -69,7 +69,7 @@ Arguments:
 
 Options:
     -h, --help       显示该帮助菜单.
-    -dgktz           动车,高铁,快速,特快,直达
+    -dgktzs          动车,高铁,快速,特快,直达,学生票
     -m               热映电影查询
     -p               莆田系医院查询
     -l               歌词查询

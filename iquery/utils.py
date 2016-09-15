@@ -116,7 +116,7 @@ class Args(object):
             arg = self.get(0)
             if not arg.startswith('-'):
                 return False
-            if arg[1] not in 'dgktz':
+            if arg[1] not in 'dgktzs':
                 return False
         return True
 

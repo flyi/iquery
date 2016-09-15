@@ -65,7 +65,7 @@ class TrainsCollection(object):
         for row in self._rows:
             train_no = row.get('station_train_code')
             initial = train_no[0].lower()
-            if not self._opts or initial in self._opts:
+            if not self._opts or self._opts.lower() == 's' or initial in self._opts:
                 train = [
                     # Column: '车次'
                     train_no,
@@ -123,6 +123,11 @@ class TrainTicketsQuery(object):
         self.to_station = to_station
         self.date = date
         self.opts = opts
+        
+        if(self.opts != None and 's' in self.opts.lower()):
+            self.purpose_codes = '0X00'
+        else:
+            self.purpose_codes = 'ADULT'
 
     def __repr__(self):
         return 'TrainTicketsQuery from={} to={} date={}'.format(
@@ -188,7 +193,7 @@ class TrainTicketsQuery(object):
 
         # A valid query date should within 50 days.
         offset = date - datetime.today()
-        if offset.days not in range(-1, 50):
+        if offset.days not in range(-1, 60):
             exit_after_echo(INVALID_DATE)
 
         return datetime.strftime(date, '%Y-%m-%d')
@@ -222,7 +227,7 @@ class TrainTicketsQuery(object):
         So, use `OrderedDict` here.
         """
         d = OrderedDict()
-        d['purpose_codes'] = 'ADULT'
+        d['purpose_codes'] = self.purpose_codes
         d['queryDate'] = self._valid_date
         d['from_station'] = self._from_station_telecode
         d['to_station'] = self._to_station_telecode
@@ -231,7 +236,7 @@ class TrainTicketsQuery(object):
     def query(self):
 
         params = self._build_params()
-
+        
         r = requests_get(QUERY_URL, params=params, verify=False)
 
         try:
